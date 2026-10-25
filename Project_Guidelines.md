@@ -22,7 +22,7 @@
 > **Required:** Your declaration must accurately reflect how you used AI tools for this project.
 
 ### Code Resources & Rules
-- **Implement Naive Bayes from Scratch:** Do NOT use machine-learning or NLP libraries (e.g., `scikit-learn`, `nltk`, `pandas`, `tensorflow`, `torch`, `transformers`).
+- **Implement Naive Bayes from Scratch:** Do NOT use machine-learning or NLP libraries (e.g., `scikit-learn`, `pandas`, `tensorflow`, `torch`, `transformers`).
 - **Python Standard Library Only:** Standard modules (such as `csv`, `math`, `collections`, `re`, `random`) are permitted.
 - **Learn from the Dataset:** The classifier must compute counts, priors, and likelihoods dynamically from the training file. Do not hard-code sentiment words or fixed probabilities.
 - **Keep Train and Test Separate:** Never train or calculate word likelihoods using test sentences.
@@ -53,9 +53,10 @@ Earn **+30% bonus marks** (up to 130/100) if you create your dataset and impleme
 
 ### Non-English Language Bonus – Tokenization Policy
 
-* Students may use an existing tokenization library (Any reasonable approach is accepted.) or manually separate words by inserting spaces.
-* All other Naive Bayes components (vocabulary, word counts, probabilities, and predictions) must be implemented from scratch.
-* During the bonus interview, students must explain their tokenization method and demonstrate how a sentence is processed step by step.
+- **Tokenization**: Students may use an existing tokenization library (any reasonable approach is accepted) or manually separate words by inserting spaces.
+- **Implementation**: All other Naive Bayes components (vocabulary, word counts, probabilities, and predictions) must be implemented from scratch.
+- **Bonus Interview**: Students must explain their tokenization method and demonstrate how a sentence is processed step by step.
+- **Label Values**: Class labels must remain "positive" and "negative", regardless of the language used.
 
 ---
 
@@ -103,10 +104,11 @@ Create labeled sentences in CSV format with columns `text,label`:
 - **Train/Test Split:**
   - **Training Set (`data/train.csv`):** **160 sentences** (80 positive, 80 negative).
   - **Testing Set (`data/test.csv`):** **40 sentences** (20 positive, 20 negative).
-- **Labels:** Must be exactly `positive` and `negative` (all lowercase).
-- **Format:** CSV with exactly two columns: `text,label`.
+- **Labels:** Must be exactly `positive` and `negative` (all lowercase), regardless of the language used.
+- **Format:** CSV with exactly two columns: `text,label`, regardless of the language used.
 - **Quality & Authenticity:** Sentences must feature realistic natural language, varied lengths, and authentic sentiment phrasing.
 
+**Note**: The dataset size, CSV format, and label requirements also apply to non-English datasets.
 ---
 
 ### 📋 Task 2: Naive Bayes Probabilities & Smoothing

@@ -22,8 +22,8 @@
 > **Required:** Your declaration must accurately reflect how you used AI tools for this project.
 
 ### Code Resources & Rules
-- **Implement Naive Bayes from Scratch:** Do NOT use machine-learning or NLP libraries (e.g., `scikit-learn`, `pandas`, `tensorflow`, `torch`, `transformers`).
-- **Python Standard Library Only:** Standard modules (such as `csv`, `math`, `collections`, `re`, `random`) are permitted.
+- **Implement Naive Bayes from Scratch:** Do NOT use machine-learning or NLP libraries (e.g., `scikit-learn`, `pandas`, `tensorflow`, `torch`, `transformers`). **Exception**: For non-English datasets, tokenization library (`nltk`) is permitted for tokenization only (see `nltk` on the autograder below). All other components must be implemented from scratch.
+- **Python Standard Library Only:** Standard modules (such as `csv`, `math`, `collections`, `re`, `random`) are permitted. (see the `nltk` exception above.)
 - **Learn from the Dataset:** The classifier must compute counts, priors, and likelihoods dynamically from the training file. Do not hard-code sentiment words or fixed probabilities.
 - **Keep Train and Test Separate:** Never train or calculate word likelihoods using test sentences.
 - **No Written Report Required:** There is no written report. Your conceptual understanding, mathematical derivations, and analysis are evaluated directly from your **video presentation**.
@@ -53,7 +53,12 @@ Earn **+30% bonus marks** (up to 130/100) if you create your dataset and impleme
 
 ### Non-English Language Bonus – Tokenization Policy
 
-- **Tokenization**: Students may use an existing tokenization library (any reasonable approach is accepted) or manually separate words by inserting spaces.
+- **Tokenization**: Students may use `nltk` (the only tokenization library available on the autograder), write their own tokenizer using the Python standard library, or manually separate words by inserting spaces.
+- **nltk on the autograder**: Only the `punkt` / `punkt_tab` tokenizer data is installed. You may use
+  `nltk.word_tokenize` / `nltk.sent_tokenize`, and tokenizers that need no extra data
+  (e.g. `RegexpTokenizer`, `WhitespaceTokenizer`, `wordpunct_tokenize`). Do **not** use nltk
+  features that require other downloads (e.g. `stopwords`, `wordnet`, taggers), and do **not** call
+  `nltk.download()` in `app.py`; these will fail on the autograder and `app.py` will crash.
 - **Implementation**: All other Naive Bayes components (vocabulary, word counts, probabilities, and predictions) must be implemented from scratch.
 - **Bonus Interview**: Students must explain their tokenization method and demonstrate how a sentence is processed step by step.
 - **Label Values**: Class labels must remain "positive" and "negative", regardless of the language used.
@@ -91,6 +96,7 @@ You must use the exact file names and folder structure shown below:
 ```
 
 **Notes**: Additional helper commands, debugging information, and warning messages are allowed, as long as they do not change the required outputs, input format, or expected program behavior.
+
 ---
 
 ### 📋 Task 1: Dataset Preparation (`data/*.csv`)
@@ -109,6 +115,7 @@ Create labeled sentences in CSV format with columns `text,label`:
 - **Quality & Authenticity:** Sentences must feature realistic natural language, varied lengths, and authentic sentiment phrasing.
 
 **Note**: The dataset size, CSV format, and label requirements also apply to non-English datasets.
+
 ---
 
 ### 📋 Task 2: Naive Bayes Probabilities & Smoothing
@@ -206,7 +213,7 @@ Record a **5–7 minute video presentation** (.mp4 format, uploaded to YouTube /
 - Students claiming the bonus must submit their project by **November 9 (Due Date)**.
 - Students must book an interview through the provided calendar link and answer 5 questions demonstrating their understanding of the implementation. Bonus marks will be awarded based on their interview performance.
 - **Interview Booking Link:** [Book Interview Appointment](https://calendar.app.google/J5EejvwkKgtPE8oKA)
-- **Tokenization Policy:** Students may use an existing tokenization library or manually separate words by inserting spaces. All other components must be implemented from scratch.
+- **Tokenization Policy:** Students may use `nltk` (the only tokenization library available on the autograder), write their own tokenizer using the Python standard library, or manually separate words by inserting spaces. All other components must be implemented from scratch.
 
 ---
 

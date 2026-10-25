@@ -85,6 +85,7 @@ You must use the exact file names and folder structure shown below:
 └── README.md              # Quick-start guide
 ```
 
+**Notes**: Additional helper commands, debugging information, and warning messages are allowed, as long as they do not change the required outputs, input format, or expected program behavior.
 ---
 
 ### 📋 Task 1: Dataset Preparation (`data/*.csv`)
@@ -111,8 +112,9 @@ Implement the probability calculations inside `app.py` using **training sentence
 1. **Tokenization & Bag of Words:**
    - Lowercase the text and tokenize into words.
    - Build a vocabulary `V` containing all unique training words.
-   - Count word occurrences for each class: `count(w, c)`.
+   - Count word occurrences for each class: `count(w, c)`. 
    - Track total word occurrences in each class: `N_c = sum of count(w, c) for all words in V`.
+   - **Repeated Words**: Count every occurrence of a word in both training and prediction. For example, "good good movie" contains two occurrences of "good", and both must contribute to the class score.
 
 2. **Class Priors:**
    - `P(c) = (number of training sentences in class c) / (total training sentences)`
@@ -131,9 +133,9 @@ Implement the probability calculations inside `app.py` using **training sentence
    - Ignore words absent from the training vocabulary `V` (do not crash on unseen words).
    - Predict the class with the higher score:
      - `predicted_class = "positive" if score("positive") > score("negative") else "negative"`
-   - **Tie-Breaking Rule:** If the two class scores tie (e.g., when a sentence contains only unknown/unseen words and class priors are equal):
+   - **Tie-Breaking Rule:** If the two class scores tie:
      - Break the tie by selecting the class with the higher class prior `P(c)`.
-     - If the priors are also equal, default to `"positive"` (i.e., predict `"positive"` whenever `score("positive") >= score("negative")`).
+     - If the priors are also equal, default to `"positive"`.
 
 2. **Standard Functions in `app.py`:**
    - `train_model(train_file="data/train.csv")`: trains the classifier on the training set.
@@ -168,7 +170,7 @@ Record a **5–7 minute video presentation** (.mp4 format, uploaded to YouTube /
 | **2. Bag-of-Words & Counts** | **5** | Walk through your tokenization logic. Show vocabulary size (`|V|`) and total words per class (`N_pos`, `N_neg`). Pick 2 specific words and show their exact counts in both positive and negative training classes. |
 | **3. Priors & Likelihood Mathematics** | **6** | Display the formulas for `P(c)` and `P(w | c)`. Walk through **actual numeric calculations**: show the numerator (`count + 1`) and denominator (`N_c + |V|`) with Laplace smoothing. Prove numbers come from training data. |
 | **4. Step-by-Step Prediction Calculation** | **5** | Enter an input sentence and trace the math live: show extracted tokens, word likelihoods for each class, total log scores, and winning prediction. Show that an unknown word is ignored without crashing. |
-| **5. Live Data Mutation Test (Crucial)** | **6** | **Live on camera:** Open `data/train.csv`, modify or add a sentence (e.g. repeat a keyword in the opposite class), rerun `python app.py`, and demonstrate that word counts, probabilities, and scores update dynamically. |
+| **5. Live Data Mutation Test (Crucial)** | **6** | **Live on camera:** Open `data/train.csv`, modify or add a sentence (e.g. repeat a keyword in the opposite class), rerun `python app.py`, and demonstrate that word counts, probabilities, and scores update dynamically. **After the demonstration, restore the original dataset before submitting.**|
 | **6. Test Set & Unseen Sentences Evaluation** | **4** | Run evaluation on `test.csv` and show accuracy and the confusion matrix. Test live on camera at least **3 brand new, unseen sentences**. Discuss at least one limitation, edge case, or misclassification. |
 | **Total Video Marks** | **30** | |
 

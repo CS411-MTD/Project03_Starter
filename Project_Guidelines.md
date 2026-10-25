@@ -2,7 +2,10 @@
 
 > [!CAUTION]
 > **STRICTLY PROHIBITED — AI-Generated Datasets:**
-> You are **strictly prohibited from using AI tools (such as ChatGPT, Claude, Gemini, Copilot, or any LLM) to generate, synthesize, or augment sentences for your datasets (`train.csv` and `test.csv`)**. All dataset sentences must be collected or curated by you from real-world natural text (e.g., product/movie reviews, articles, social posts) or authored manually by yourself. Submissions using AI-generated or synthetic sentences violate academic integrity policy.
+> You are **strictly prohibited from using AI tools (such as ChatGPT, Claude, Gemini, Copilot, or any LLM) to generate, synthesize, or augment sentences for your datasets (`train.csv` and `test.csv`)**. All dataset sentences must be collected or curated by you from real-world natural text (e.g., product/movie reviews, articles, social posts or combined) or authored manually by yourself. 
+- You may correct or reassign sentiment labels (positive/negative) based on your own judgment, even if they differ from the original source labels.
+- If you use sentences from external sources, you must cite those sources. Citations are not required for sentences you write yourself.
+- Using AI-generated or synthetic sentences violate academic integrity policy. 
 
 - **Prohibited — Dataset Generation:** You must **NOT** use AI to write, paraphrase, generate, or expand training or testing sentences.
 - **Limited AI Use:** AI coding assistants (e.g., GitHub Copilot) may be used for syntax suggestions, debugging, coding support, and learning assistance.
@@ -19,7 +22,7 @@
 > **Required:** Your declaration must accurately reflect how you used AI tools for this project.
 
 ### Code Resources & Rules
-- **Implement Naive Bayes from Scratch:** Do NOT use machine-learning or NLP libraries (e.g., `scikit-learn`, `nltk`, `pandas`, `numpy`, `scipy`, `torch`, `transformers`).
+- **Implement Naive Bayes from Scratch:** Do NOT use machine-learning or NLP libraries (e.g., `scikit-learn`, `nltk`, `pandas`, `tensorflow`, `torch`, `transformers`).
 - **Python Standard Library Only:** Standard modules (such as `csv`, `math`, `collections`, `re`, `random`) are permitted.
 - **Learn from the Dataset:** The classifier must compute counts, priors, and likelihoods dynamically from the training file. Do not hard-code sentiment words or fixed probabilities.
 - **Keep Train and Test Separate:** Never train or calculate word likelihoods using test sentences.
@@ -41,15 +44,16 @@ In this assignment, you will model and implement a binary sentiment classifier (
 
 ---
 
-## 🌟 +30% Bonus: Non-English Language
+## +30% Bonus: Non-English Language
 
 Earn **+30% bonus marks** (up to 130/100) if you create your dataset and implement your classifier for a natural language other than English (e.g., Spanish, Burmese, Hindi, Chinese, German, Arabic, Tagalog, Vietnamese, French, etc.)!
 - To claim the bonus, indicate your chosen language in `video_link.txt` and demonstrate tokenization, vocabulary counts, and predictions in that language in your video presentation.
 - Students must also book an interview through the provided [calendar booking link](https://calendar.app.google/J5EejvwkKgtPE8oKA) and answer 5 questions demonstrating their understanding of the implementation. Bonus marks will be awarded based on interview performance.
 
+
 ### Non-English Language Bonus – Tokenization Policy
 
-* Students may use an existing tokenization library or manually separate words by inserting spaces.
+* Students may use an existing tokenization library (Any reasonable approach is accepted.) or manually separate words by inserting spaces.
 * All other Naive Bayes components (vocabulary, word counts, probabilities, and predictions) must be implemented from scratch.
 * During the bonus interview, students must explain their tokenization method and demonstrate how a sentence is processed step by step.
 
@@ -131,8 +135,7 @@ Implement the probability calculations inside `app.py` using **training sentence
    For any input sentence, tokenize it and calculate the log score for each class:
    - `score(c) = log(P(c)) + sum(log(P(w | c)) for each token w in the sentence that exists in V)`
    - Ignore words absent from the training vocabulary `V` (do not crash on unseen words).
-   - Predict the class with the higher score:
-     - `predicted_class = "positive" if score("positive") > score("negative") else "negative"`
+   - Predict the class with the higher score. 
    - **Tie-Breaking Rule:** If the two class scores tie:
      - Break the tie by selecting the class with the higher class prior `P(c)`.
      - If the priors are also equal, default to `"positive"`.
@@ -196,9 +199,9 @@ Record a **5–7 minute video presentation** (.mp4 format, uploaded to YouTube /
 - Live data mutation test: **6 marks**
 - Test set & unseen sentences evaluation: **4 marks**
 
-### 3. 🌟 Non-English Language Bonus (+30 marks / +30%)
+### 3. Non-English Language Bonus (+30 marks / +30%)
 - Students who prepare their dataset and implement their classifier in a natural language other than English are eligible for up to 30 bonus marks.
-- To claim the bonus, Students claiming the bonus must submit their project by November 9 (Due Date).
+- Students claiming the bonus must submit their project by **November 9 (Due Date)**.
 - Students must book an interview through the provided calendar link and answer 5 questions demonstrating their understanding of the implementation. Bonus marks will be awarded based on their interview performance.
 - **Interview Booking Link:** [Book Interview Appointment](https://calendar.app.google/J5EejvwkKgtPE8oKA)
 - **Tokenization Policy:** Students may use an existing tokenization library or manually separate words by inserting spaces. All other components must be implemented from scratch.

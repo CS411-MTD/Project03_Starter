@@ -3,30 +3,21 @@
 
 This repository contains the starter files, directory structure, and guidelines for **Project 3: Naive Bayes Text Classifier (Sentiment Analysis)**.
 
-For complete project instructions, algorithm specifications, AI policy, dataset requirements, and the video presentation rubric, refer to **[Project_Guidelines.md](Project_Guidelines.md)**.
+For complete project instructions, algorithm specifications, AI policy, dataset requirements, and video presentation rubric, refer to **[Project_Guidelines.md](Project_Guidelines.md)**.
 
 ---
 
-## Directory Structure
+### Important Dates
 
-You must use the exact file names and directory structure shown below:
+- **Project Released:** October 26, 2026, 12:00 AM
+- **Submission Deadline:** November 9, 2026, 11:59 PM
+- **Late Submission Deadline:** November 12, 2026, 11:59 PM
 
-```text
-.
-├── app.py                 # Main entry point with train_model(), predict(), evaluate_model()
-├── data/                  # Dataset directory
-│   ├── train.csv          # Training sentences (text,label)
-│   └── test.csv           # Testing sentences (text,label)
-├── video_link.txt         # Video presentation URL and student declaration
-├── AI_declaration.png     # PETRA AI Student Declaration
-├── requirements.txt       # Python dependencies (pure Python standard library)
-├── Project_Guidelines.md  # Detailed project requirements and marking scheme
-├── .gitignore             # Git ignore file
-└── README.md              # This starter guide
-```
+- **Late Policy**: Submissions are accepted without penalty until November 12 at 11:59 PM (Late Submission Deadline). 
+- However, to qualify for the Non-English Language Bonus (+30%), students must submit their project by the **Submission Deadline (November 9 at 11:59 PM)** and book an interview (36 interview slots are available on November 11, 18, and 21, on a first-come, first-served basis.).
+- Submissions after November 12 at 11:59 PM will not be accepted.
 
 ---
-
 ## Getting Started
 
 ### 1. Set Up Python Virtual Environment (Optional)
@@ -50,7 +41,7 @@ Please read **[Project_Guidelines.md](Project_Guidelines.md)** carefully before 
 - **Dataset Preparation:** 100 positive and 100 negative sentences (80/80 train, 20/20 test); AI generation of data is strictly prohibited.
 - **Algorithm Specifications:** Bag-of-words counting, class priors, Laplace smoothing, log-space scoring, and tie-breaking rules.
 - **Video Presentation Rubric (30 marks):** 5–7 minute video recording walkthrough (no written report).
-- **🌟 +30% Non-English Language Bonus:** Guidelines and interview booking link for non-English language submissions.
+- **+30% Non-English Language Bonus:** Guidelines and interview booking link for non-English language submissions.
 
 ---
 

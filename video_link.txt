@@ -8,6 +8,10 @@ Student Information:
 - UIN: [Replace with your 9-digit UIN]
 - NetID: [Replace with your UIC NetID]
 
+Data Source (if any): 
+- Source 1: [Replace with your data source (if any)]
+- Source 2: [Replace with your data source (if any)]
+
 Video Presentation Details:
 - Video URL: [Paste your accessible YouTube / Google Drive / Dropbox link here]
 - Video Duration: [e.g., 5 min 30 sec]

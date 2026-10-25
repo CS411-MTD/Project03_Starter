@@ -1,0 +1,33 @@
+# Operating System & IDE Files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Python & Virtual Environment Files
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+venv/
+.venv/
+env/
+ENV/
+
+# Project & Autograder Ignores (Grading / TA only)
+tests/
+NB_autograder/
+autograder/
+*.zip
+
+# Data Files (Students create their own train/test data)
+data/
+data/*
+*.csv
+
+# Solutions & Instructor Material
+solutions/
+*Solution*/
+*solution*/
+*Marking_Guidelines*
+.github/

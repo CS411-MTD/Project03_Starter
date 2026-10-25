@@ -198,7 +198,8 @@ Record a **5–7 minute video presentation** (.mp4 format, uploaded to YouTube /
 
 ### 3. 🌟 Non-English Language Bonus (+30 marks / +30%)
 - Students who prepare their dataset and implement their classifier in a natural language other than English are eligible for up to 30 bonus marks.
-- To claim the bonus, students must book an interview through the provided calendar link and answer 5 questions demonstrating their understanding of the implementation. Bonus marks will be awarded based on their interview performance.
+- To claim the bonus, Students claiming the bonus must submit their project by November 9 (Due Date).
+- Students must book an interview through the provided calendar link and answer 5 questions demonstrating their understanding of the implementation. Bonus marks will be awarded based on their interview performance.
 - **Interview Booking Link:** [Book Interview Appointment](https://calendar.app.google/J5EejvwkKgtPE8oKA)
 - **Tokenization Policy:** Students may use an existing tokenization library or manually separate words by inserting spaces. All other components must be implemented from scratch.
 

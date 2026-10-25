@@ -1,5 +1,10 @@
 ## AI Policy: Use & Declaration
 
+> [!CAUTION]
+> **STRICTLY PROHIBITED — AI-Generated Datasets:**
+> You are **strictly prohibited from using AI tools (such as ChatGPT, Claude, Gemini, Copilot, or any LLM) to generate, synthesize, or augment sentences for your datasets (`train.csv` and `test.csv`)**. All dataset sentences must be collected or curated by you from real-world natural text (e.g., product/movie reviews, articles, social posts) or authored manually by yourself. Submissions using AI-generated or synthetic sentences violate academic integrity policy.
+
+- **Prohibited — Dataset Generation:** You must **NOT** use AI to write, paraphrase, generate, or expand training or testing sentences.
 - **Limited AI Use:** AI coding assistants (e.g., GitHub Copilot) may be used for syntax suggestions, debugging, coding support, and learning assistance.
 - **Prohibited — Project Materials:** Do not paste project prompts, guidelines, problem statements, or substantial portions of project materials into AI systems for code generation, completion, or debugging.
 - **Prohibited — Written Work:** All submitted explanations, video commentary, and mathematical reasoning must be **your own voice and reasoning**.
@@ -30,7 +35,7 @@ In this assignment, you will model and implement a binary sentiment classifier (
 
 1. **Dataset Construction:** Build and organize a labeled text dataset split cleanly into training and testing sets.
 2. **Text Preprocessing & Bag-of-Words:** Implement tokenization, vocabulary extraction, and word frequency counting using standard Python data structures.
-3. **Probabilistic Modeling:** Calculate class priors and word likelihoods with Laplace smoothing ($\alpha = 1$).
+3. **Probabilistic Modeling:** Calculate class priors and word likelihoods with Laplace smoothing (alpha = 1).
 4. **Log-Space Classification:** Implement sentence prediction using log probabilities to prevent numerical underflow.
 5. **Model Evaluation & Generalization:** Evaluate classifier performance on a held-out test set and test dynamic prediction on unseen sentences.
 
@@ -42,16 +47,22 @@ Earn **+30% bonus marks** (up to 130/100) if you create your dataset and impleme
 - To claim the bonus, indicate your chosen language in `video_link.txt` and demonstrate tokenization, vocabulary counts, and predictions in that language in your video presentation.
 - Students must also book an interview through the provided [calendar booking link](https://calendar.app.google/J5EejvwkKgtPE8oKA) and answer 5 questions demonstrating their understanding of the implementation. Bonus marks will be awarded based on interview performance.
 
+### Non-English Language Bonus – Tokenization Policy
+
+* Students may use an existing tokenization library or manually separate words by inserting spaces.
+* All other Naive Bayes components (vocabulary, word counts, probabilities, and predictions) must be implemented from scratch.
+* During the bonus interview, students must explain their tokenization method and demonstrate how a sentence is processed step by step.
+
 ---
 
 ## Your Job
 
-1. Prepare your labeled datasets in `data/train.csv` and `data/test.csv`.
+1. Prepare your labeled datasets in `data/train.csv` and `data/test.csv` (total dataset size: **100 positive, 100 negative** sentences, collected/authored manually without AI).
 2. Implement your Naive Bayes model in `app.py`.
 3. Provide the main interface functions in `app.py`:
    - `train_model(train_file="data/train.csv")`
    - `predict(text)`: returns `"positive"` or `"negative"`
-   - `evaluate_model(test_file="data/test.csv")`
+   - `evaluate_model(test_file="data/test.csv")`: returns a dictionary with `"accuracy"` and `"confusion_matrix"`
 4. Record a 5–7 minute video presentation with your face visible and paste the link in `video_link.txt`.
 5. Test your implementation by running `python app.py`.
 
@@ -78,11 +89,18 @@ You must use the exact file names and folder structure shown below:
 
 ### 📋 Task 1: Dataset Preparation (`data/*.csv`)
 
+> [!CAUTION]
+> **AI Usage Prohibited in Dataset Creation:**
+> You are **strictly prohibited** from using AI (ChatGPT, Claude, Gemini, Copilot, etc.) to generate, synthesize, or rephrase sentences for your datasets. All sentences must be collected from real natural language sources (e.g., product/movie reviews, customer feedback, forums) or written manually by you.
+
 Create labeled sentences in CSV format with columns `text,label`:
-- **Labels:** Must be exactly `positive` and `negative`.
-- **Training Set (`data/train.csv`):** Contains training sentences balanced between both classes.
-- **Testing Set (`data/test.csv`):** Contains held-out test sentences balanced between both classes.
-- Ensure sentences feature realistic vocabulary, varied lengths, and distinct phrasing.
+- **Dataset Size:** Your total dataset must contain exactly **100 positive** and **100 negative** sentences (200 sentences total across training and testing).
+- **Train/Test Split:**
+  - **Training Set (`data/train.csv`):** **160 sentences** (80 positive, 80 negative).
+  - **Testing Set (`data/test.csv`):** **40 sentences** (20 positive, 20 negative).
+- **Labels:** Must be exactly `positive` and `negative` (all lowercase).
+- **Format:** CSV with exactly two columns: `text,label`.
+- **Quality & Authenticity:** Sentences must feature realistic natural language, varied lengths, and authentic sentiment phrasing.
 
 ---
 
@@ -92,16 +110,16 @@ Implement the probability calculations inside `app.py` using **training sentence
 
 1. **Tokenization & Bag of Words:**
    - Lowercase the text and tokenize into words.
-   - Build a vocabulary $V$ containing all unique training words.
-   - Count word occurrences for each class: $\operatorname{count}(w, c)$.
-   - Track total word occurrences in each class: $N_c = \sum_{w \in V} \operatorname{count}(w, c)$.
+   - Build a vocabulary `V` containing all unique training words.
+   - Count word occurrences for each class: `count(w, c)`.
+   - Track total word occurrences in each class: `N_c = sum of count(w, c) for all words in V`.
 
 2. **Class Priors:**
-   $$P(c) = \frac{\text{number of training sentences in class } c}{\text{total training sentences}}$$
+   - `P(c) = (number of training sentences in class c) / (total training sentences)`
 
-3. **Word Likelihood with Laplace Smoothing ($\alpha = 1$):**
-   $$P(w \mid c) = \frac{\operatorname{count}(w, c) + 1}{N_c + |V|}$$
-   where $|V|$ is the number of unique words in the training vocabulary.
+3. **Word Likelihood with Laplace Smoothing (alpha = 1):**
+   - `P(w | c) = (count(w, c) + 1) / (N_c + |V|)`
+   - where `|V|` is the number of unique words in the training vocabulary, and `N_c` is the total count of all words in class `c`.
 
 ---
 
@@ -109,15 +127,18 @@ Implement the probability calculations inside `app.py` using **training sentence
 
 1. **Log-Space Prediction:**
    For any input sentence, tokenize it and calculate the log score for each class:
-   $$\operatorname{score}(c) = \log P(c) + \sum_{w \in \text{tokens} \cap V} \log P(w \mid c)$$
-   - Ignore words absent from the training vocabulary $V$ (do not crash on unseen words).
+   - `score(c) = log(P(c)) + sum(log(P(w | c)) for each token w in the sentence that exists in V)`
+   - Ignore words absent from the training vocabulary `V` (do not crash on unseen words).
    - Predict the class with the higher score:
-     $$\hat{c} = \arg\max_{c \in \{\text{positive}, \text{negative}\}} \operatorname{score}(c)$$
+     - `predicted_class = "positive" if score("positive") > score("negative") else "negative"`
+   - **Tie-Breaking Rule:** If the two class scores tie (e.g., when a sentence contains only unknown/unseen words and class priors are equal):
+     - Break the tie by selecting the class with the higher class prior `P(c)`.
+     - If the priors are also equal, default to `"positive"` (i.e., predict `"positive"` whenever `score("positive") >= score("negative")`).
 
 2. **Standard Functions in `app.py`:**
-   - `train_model(train_file="data/train.csv")`: trains the classifier.
+   - `train_model(train_file="data/train.csv")`: trains the classifier on the training set.
    - `predict(text)`: returns `"positive"` or `"negative"`.
-   - `evaluate_model(test_file="data/test.csv")`: returns accuracy and confusion matrix (TP, TN, FP, FN).
+   - `evaluate_model(test_file="data/test.csv")`: evaluates performance on the test set and returns a dictionary. 
    - Running `python app.py` should train the model, display evaluation metrics, and provide an interactive loop to test sentences.
 
 3. **Testing Scope:**
@@ -143,9 +164,9 @@ Record a **5–7 minute video presentation** (.mp4 format, uploaded to YouTube /
 
 | Component | Marks | What You Must Demonstrate in the Video |
 | :--- | :---: | :--- |
-| **1. Project Directory & Dataset** | **4** | Show your project files. Open `train.csv` and `test.csv`. Show sentence samples, class balance, and dataset size. If claiming the +30% bonus, state the non-English language chosen. |
-| **2. Bag-of-Words & Counts** | **5** | Walk through your tokenization logic. Show vocabulary size ($|V|$) and total words per class ($N_{pos}, N_{neg}$). Pick 2 specific words and show their exact counts in both positive and negative training classes. |
-| **3. Priors & Likelihood Mathematics** | **6** | Display the formulas for $P(c)$ and $P(w \mid c)$. Walk through **actual numeric calculations**: show the numerator ($\text{count} + 1$) and denominator ($N_c + |V|$) with Laplace smoothing. Prove numbers come from training data. |
+| **1. Project Directory & Dataset** | **4** | Show your project files. Open `train.csv` and `test.csv`. Show sentence samples, class balance (100 positive, 100 negative total: 80/80 train, 20/20 test), and dataset size. If claiming the +30% bonus, state the non-English language chosen. |
+| **2. Bag-of-Words & Counts** | **5** | Walk through your tokenization logic. Show vocabulary size (`|V|`) and total words per class (`N_pos`, `N_neg`). Pick 2 specific words and show their exact counts in both positive and negative training classes. |
+| **3. Priors & Likelihood Mathematics** | **6** | Display the formulas for `P(c)` and `P(w | c)`. Walk through **actual numeric calculations**: show the numerator (`count + 1`) and denominator (`N_c + |V|`) with Laplace smoothing. Prove numbers come from training data. |
 | **4. Step-by-Step Prediction Calculation** | **5** | Enter an input sentence and trace the math live: show extracted tokens, word likelihoods for each class, total log scores, and winning prediction. Show that an unknown word is ignored without crashing. |
 | **5. Live Data Mutation Test (Crucial)** | **6** | **Live on camera:** Open `data/train.csv`, modify or add a sentence (e.g. repeat a keyword in the opposite class), rerun `python app.py`, and demonstrate that word counts, probabilities, and scores update dynamically. |
 | **6. Test Set & Unseen Sentences Evaluation** | **4** | Run evaluation on `test.csv` and show accuracy and the confusion matrix. Test live on camera at least **3 brand new, unseen sentences**. Discuss at least one limitation, edge case, or misclassification. |
@@ -176,7 +197,8 @@ Record a **5–7 minute video presentation** (.mp4 format, uploaded to YouTube /
 ### 3. 🌟 Non-English Language Bonus (+30 marks / +30%)
 - Students who prepare their dataset and implement their classifier in a natural language other than English are eligible for up to 30 bonus marks.
 - To claim the bonus, students must book an interview through the provided calendar link and answer 5 questions demonstrating their understanding of the implementation. Bonus marks will be awarded based on their interview performance.
-- **Interview Booking Link:** [Book Interview Appointment](https://calendar.app.google/J5EejvwkKgtPE8oKA) (https://calendar.app.google/J5EejvwkKgtPE8oKA)
+- **Interview Booking Link:** [Book Interview Appointment](https://calendar.app.google/J5EejvwkKgtPE8oKA)
+- **Tokenization Policy:** Students may use an existing tokenization library or manually separate words by inserting spaces. All other components must be implemented from scratch.
 
 ---
 

@@ -1,11 +1,15 @@
 # UIC CS 411: Artificial Intelligence
 ## Project 3: Naive Bayes Text Classifier from Scratch — Starter Code
 
-This repository contains the starter files, dataset templates, and guidelines for **Project 3: Naive Bayes Text Classifier (Sentiment Analysis)**.
+This repository contains the starter files, directory structure, and guidelines for **Project 3: Naive Bayes Text Classifier (Sentiment Analysis)**.
+
+For complete project instructions, algorithm specifications, AI policy, dataset requirements, and the video presentation rubric, refer to **[Project_Guidelines.md](Project_Guidelines.md)**.
 
 ---
 
 ## Directory Structure
+
+You must use the exact file names and directory structure shown below:
 
 ```text
 .
@@ -39,36 +43,19 @@ This executes `app.py` to train on `data/train.csv` and evaluate on `data/test.c
 
 ---
 
-## Your Implementation Tasks
+## Project Guidelines
 
-1. **Dataset Preparation (`data/train.csv` and `data/test.csv`)**:
-   - Provide labeled sentences with columns `text,label`.
-   - Labels must be `positive` and `negative`.
-   - Ensure both classes are present in training and testing datasets.
-
-2. **Naive Bayes from Scratch (`app.py`)**:
-   - **Pure Python standard library only** (no `scikit-learn`, `nltk`, `pandas`, `numpy`, `torch`).
-   - Implement tokenization, bag-of-words counting, class priors $P(c)$, and Laplace-smoothed word likelihoods $P(w \mid c)$.
-   - Predict sentiment using log scores:
-     $$\operatorname{score}(c) = \log P(c) + \sum_{w \in \text{tokens} \cap V} \log P(w \mid c)$$
-   - Ignore words that do not appear in the training vocabulary without crashing.
-
-3. **Prediction Engine**:
-   - Ensure `predict(text)` returns `"positive"` or `"negative"`.
-   - The classifier must successfully predict on the provided test set and on unseen sentences.
-
-4. **Video Recording (No Written Report)**:
-   - **No written report is required.** Your work is evaluated through your code and a **5–7 minute video presentation** with your face visible.
-   - Walk through code, bag-of-words counts, probability math, live sentence prediction, and perform the live data mutation test.
-   - Upload to YouTube / Google Drive / Dropbox and paste the link in `video_link.txt`.
-
-5. **🌟 +30% Non-English Language Bonus**:
-   - Earn **+30% bonus marks** if you build your dataset and run classification in a natural language other than English.
+Please read **[Project_Guidelines.md](Project_Guidelines.md)** carefully before starting. It covers:
+- **AI Policy & Declaration:** Allowed vs. prohibited AI use; mandatory PETRA AI Student Declaration (`AI_declaration.png`).
+- **Dataset Preparation:** 100 positive and 100 negative sentences (80/80 train, 20/20 test); AI generation of data is strictly prohibited.
+- **Algorithm Specifications:** Bag-of-words counting, class priors, Laplace smoothing, log-space scoring, and tie-breaking rules.
+- **Video Presentation Rubric (30 marks):** 5–7 minute video recording walkthrough (no written report).
+- **🌟 +30% Non-English Language Bonus:** Guidelines and interview booking link for non-English language submissions.
 
 ---
 
 ## Submission Instructions
 
-Submit all files listed in the directory structure (including `app.py`, `video_link.txt`, `AI_declaration.png`, and the `data/` directory) to **Gradescope** under **Project 3**.
+Submit all files listed in the directory structure (including `app.py`, `data/train.csv`, `data/test.csv`, `video_link.txt`, `AI_declaration.png`, and `requirements.txt`) to **Gradescope** under **Project 3**.
 
-For complete requirements, mathematical formulas, and the detailed video presentation rubric, refer to [Project_Guidelines.md](Project_Guidelines.md).
+For complete requirements and the evaluation rubric, refer to [Project_Guidelines.md](Project_Guidelines.md).
